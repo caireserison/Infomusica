@@ -6,14 +6,30 @@ using System.Web;
 /// <summary>
 /// Descrição resumida de DeezerController
 /// </summary>
-public class DeezerController
+public class DeezerController : IDeezer
 {
     public List<Artistas> BuscarArtistaPorNome(String nome)
     {
-        List<Artistas> artistas = new List<Artistas>();
+        return RestController.BuscarArtistaPorNome(nome);
+    }
 
-        RestController.BuscarArtistaPorNome("Guns");
+    public List<Albuns> BuscarAlbumPorId(long id)
+    {
+        return RestController.BuscarAlbumPorId(id);
+    }
 
-        return artistas;
+    public List<Faixas> BuscarFaixaAlbumPorId(long id)
+    {
+        return RestController.BuscarFaixaAlbumPorId(id);
+    }
+
+    public List<Faixas> BuscarFaixaPorId(long id)
+    {
+        return RestController.BuscarFaixaPorId(id);
+    }
+
+    public string BuscarEmbedFaixaPorId(string link)
+    {
+        return RestController.BuscarEmbedFaixaPorId(link);
     }
 }

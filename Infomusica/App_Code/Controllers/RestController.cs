@@ -28,9 +28,9 @@ public static class RestController
         return results;
     }
 
-    public static void BuscarArtistaPorNome(String nome)
+    public static List<Artistas> BuscarArtistaPorNome(String nome)
     {
-        IList<Artistas> artistas = new List<Artistas>();
+        var artistas = new List<Artistas>();
 
         var uri = ConfigurationManager.AppSettings["DeezerArtista"].ToString();
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, nome)))
@@ -38,11 +38,13 @@ public static class RestController
             Artistas artista = result.ToObject<Artistas>();
             artistas.Add(artista);
         }
+
+        return artistas;
     }
 
-    public static void BuscarAlbumPorId(long id)
+    public static List<Albuns> BuscarAlbumPorId(long id)
     {
-        IList<Albuns> albuns = new List<Albuns>();
+        var albuns = new List<Albuns>();
 
         var uri = ConfigurationManager.AppSettings["DeezerAlbum"].ToString();
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
@@ -50,11 +52,13 @@ public static class RestController
             Albuns album = result.ToObject<Albuns>();
             albuns.Add(album);
         }
+
+        return albuns;
     }
 
-    public static void BuscarFaixaAlbumPorId(long id)
+    public static List<Faixas> BuscarFaixaAlbumPorId(long id)
     {
-        IList<Faixas> faixas = new List<Faixas>();
+        var faixas = new List<Faixas>();
 
         var uri = ConfigurationManager.AppSettings["DeezerFaixaAlbum"].ToString();
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
@@ -62,11 +66,13 @@ public static class RestController
             Faixas faixa = result.ToObject<Faixas>();
             faixas.Add(faixa);
         }
+
+        return faixas;
     }
 
-    public static void BuscarFaixaPorId(long id)
+    public static List<Faixas> BuscarFaixaPorId(long id)
     {
-        IList<Faixas> faixas = new List<Faixas>();
+        var faixas = new List<Faixas>();
 
         var uri = ConfigurationManager.AppSettings["DeezerFaixa"].ToString();
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
@@ -74,6 +80,8 @@ public static class RestController
             Faixas faixa = result.ToObject<Faixas>();
             faixas.Add(faixa);
         }
+
+        return faixas;
     }
 
     public static String BuscarEmbedFaixaPorId(String link)
