@@ -7,15 +7,29 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
+    DeezerController deezer = new DeezerController();
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
 
-    protected void btnTeste_Click(object sender, EventArgs e)
+    protected void btnBuscarArtista_Click(object sender, EventArgs e)
     {
-        DeezerController deezer = new DeezerController();
+        ExibirArtistas();
+    }
 
-        deezer.BuscarArtistaPorNome("Guns");
+    private void ExibirArtistas()
+    {
+        gdArtistas.DataSource = ObterArtistas();
+        gdArtistas.DataBind();
+    }
+
+    private List<Artistas> ObterArtistas()
+    {
+        List<Artistas> artistas = new List<Artistas>();
+
+        String artista = tbArtista.Text;
+        return deezer.BuscarArtistaPorNome(artista);
     }
 }

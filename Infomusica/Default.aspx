@@ -10,7 +10,10 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Button ID="btnTeste" Text="TESTE" runat="server" OnClick="btnTeste_Click" />
+            <asp:TextBox ID="tbArtista" Text="" runat="server" ></asp:TextBox>
+            <asp:Button ID="btBuscarArtista" Text="OK" runat="server" OnClick="btnBuscarArtista_Click" />
+            <br />
+            <asp:GridView ID="gdArtistas" runat="server"></asp:GridView>
         </div>
     </form>
 </body>
