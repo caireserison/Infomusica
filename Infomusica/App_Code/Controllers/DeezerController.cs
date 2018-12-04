@@ -12,7 +12,7 @@ public class DeezerController
     {
         List<Artistas> artistas = new List<Artistas>();
 
-        RestController.BuscarPorNome("Guns");
+        RestController.BuscarArtistaPorNome("Guns");
 
         return artistas;
     }

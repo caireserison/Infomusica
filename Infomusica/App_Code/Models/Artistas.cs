@@ -9,7 +9,9 @@ using System.Web;
 /// </summary>
 public class Artistas : Comum
 {
-    private List<Albuns> albuns;
-    
-    public List<Albuns> Albuns { get => albuns; set => albuns = value; }
+    private String name;
+    private String picture_medium;
+
+    public string Name { get => name; set => name = value; }
+    public string Picture_medium { get => picture_medium; set => picture_medium = value; }
 }

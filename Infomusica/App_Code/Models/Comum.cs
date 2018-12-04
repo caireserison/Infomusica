@@ -11,8 +11,10 @@ using System.Web;
 public class Comum
 {
     private long id;
-    private String name;
+    private String tracklist;
+    private String type;
 
     public long Id { get => id; set => id = value; }
-    public string Name { get => name; set => name = value; }
+    public string Tracklist { get => tracklist; set => tracklist = value; }
+    public string Type { get => type; set => type = value; }
 }

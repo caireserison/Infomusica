@@ -8,7 +8,11 @@ using System.Web;
 /// </summary>
 public class Albuns : Comum
 {
-    private List<Faixas> faixas;
+    private String title;
+    private String cover_medium;
+    private int genre_id;
 
-    public List<Faixas> Faixas { get => faixas; set => faixas = value; }
+    public string Title { get => title; set => title = value; }
+    public string Cover_medium { get => cover_medium; set => cover_medium = value; }
+    public int Genre_id { get => genre_id; set => genre_id = value; }
 }
