@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,10 +16,14 @@ public static class RestController
     private static IList<JToken> ResponseJsonAPI(String api)
     {
         WebClient client = new WebClient();
+        IList<JToken> results;
 
         String json = client.DownloadString(api);
         JObject objeto = JObject.Parse(json);
-        IList<JToken> results = objeto["data"].Children().ToList();
+        if (objeto["data"] != null)
+            results = objeto["data"].Children().ToList();
+        else
+            results = objeto.Children().ToList();
 
         return results;
     }
@@ -26,8 +31,9 @@ public static class RestController
     public static void BuscarArtistaPorNome(String nome)
     {
         IList<Artistas> artistas = new List<Artistas>();
-        
-        foreach (JToken result in ResponseJsonAPI(String.Format("http://api.deezer.com/search/artist/autocomplete?q={0}", nome)))
+
+        var uri = ConfigurationManager.AppSettings["DeezerArtista"].ToString();
+        foreach (JToken result in ResponseJsonAPI(String.Format(uri, nome)))
         {
             Artistas artista = result.ToObject<Artistas>();
             artistas.Add(artista);
@@ -37,8 +43,9 @@ public static class RestController
     public static void BuscarAlbumPorId(long id)
     {
         IList<Albuns> albuns = new List<Albuns>();
-        
-        foreach (JToken result in ResponseJsonAPI(String.Format("https://api.deezer.com/artist/{0}/albums", id)))
+
+        var uri = ConfigurationManager.AppSettings["DeezerAlbum"].ToString();
+        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
         {
             Albuns album = result.ToObject<Albuns>();
             albuns.Add(album);
@@ -49,10 +56,38 @@ public static class RestController
     {
         IList<Faixas> faixas = new List<Faixas>();
 
-        foreach (JToken result in ResponseJsonAPI(String.Format("https://api.deezer.com/album/{0}/tracks", id)))
+        var uri = ConfigurationManager.AppSettings["DeezerFaixaAlbum"].ToString();
+        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
         {
             Faixas faixa = result.ToObject<Faixas>();
             faixas.Add(faixa);
         }
+    }
+
+    public static void BuscarFaixaPorId(long id)
+    {
+        IList<Faixas> faixas = new List<Faixas>();
+
+        var uri = ConfigurationManager.AppSettings["DeezerFaixa"].ToString();
+        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
+        {
+            Faixas faixa = result.ToObject<Faixas>();
+            faixas.Add(faixa);
+        }
+    }
+
+    public static String BuscarEmbedFaixaPorId(String link)
+    {
+        WebClient client = new WebClient();
+        IList<JToken> results;
+
+        var uri = ConfigurationManager.AppSettings["DeezerEmbedFaixa"].ToString();
+        
+        String json = client.DownloadString(String.Format(uri, link));
+        JObject objeto = JObject.Parse(json);
+        results = objeto.Children().ToList();
+        String embed = results[0]["html"].ToString();
+
+        return embed;
     }
 }
