@@ -8,6 +8,7 @@ using System.Web;
 /// </summary>
 public interface IDeezer
 {
+    Generico BuscarGenerico(String nome);
     List<Artistas> BuscarArtistaPorNome(String nome);
     List<Albuns> BuscarAlbumPorId(long id);
     List<Faixas> BuscarFaixaAlbumPorId(long id);
