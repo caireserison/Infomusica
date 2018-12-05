@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Info Musica</title>
+    <meta name="viewport" content="width=devide-width, initial-scale=1" />
+
+
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="StyleSelection" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+
+
+
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <script src="Scripts/jquery-3.3.1.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+        <asp:ContentPlaceHolder ID="ScriptSection" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
