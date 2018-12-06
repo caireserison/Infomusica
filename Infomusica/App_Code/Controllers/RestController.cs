@@ -28,6 +28,46 @@ public static class RestController
         return results;
     }
 
+    private static IList<JToken> ResponseJsonGenericoAPI(String api)
+    {
+        WebClient client = new WebClient();
+        IList<JToken> results;
+
+        String json = client.DownloadString(api);
+        JObject objeto = JObject.Parse(json);
+
+        results = objeto["tracks"]["data"].Children().ToList();
+
+        return results;
+    }
+
+    public static Generico BuscarGenerico(String nome)
+    {
+        Generico generico = new Generico();
+        var uri = ConfigurationManager.AppSettings["DeezerBuscaGenerica"].ToString();
+        foreach (JToken result in ResponseJsonGenericoAPI(String.Format(uri, nome)))
+        {
+            String tipo = result["type"].ToString();
+
+            switch ((TypeDeezer)Enum.Parse(typeof(TypeDeezer), tipo))
+            {
+                case TypeDeezer.artist:
+                    generico.Artistas.Add(result.ToObject<Artistas>());
+                    break;
+                case TypeDeezer.album:
+                    generico.Albuns.Add(result.ToObject<Albuns>());
+                    break;
+                case TypeDeezer.track:
+                    generico.Faixas.Add(result.ToObject<Faixas>());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return generico;
+    }
+
     public static List<Artistas> BuscarArtistaPorNome(String nome)
     {
         var artistas = new List<Artistas>();
@@ -98,4 +138,11 @@ public static class RestController
 
         return embed;
     }
+}
+
+enum TypeDeezer
+{
+    artist,
+    album,
+    track
 }

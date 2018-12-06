@@ -8,6 +8,11 @@ using System.Web;
 /// </summary>
 public class DeezerController : IDeezer
 {
+    public Generico BuscarGenerico(string nome)
+    {
+        return RestController.BuscarGenerico(nome);
+    }
+
     public List<Artistas> BuscarArtistaPorNome(String nome)
     {
         return RestController.BuscarArtistaPorNome(nome);
