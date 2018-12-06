@@ -12,15 +12,23 @@ public class LoginModel
 {
     infomusicaEntities contextodb = new infomusicaEntities();
 
-    public int ObterLogin(String capturado)
+    public ILogin ObterUsuario(ILogin usuario)
     {
-        var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == capturado);
-        return retorno != null ? retorno.id : -1;
+        var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login);
+        usuario.id = retorno != null ? retorno.id : 0;
+        return usuario;
     }
 
-    public void IncluirLogin(ILogin capturado)
+    public void IncluirUsuario(ILogin usuario)
     {
-        contextodb.TB_USUARIOS.Add(new TB_USUARIOS() { login=capturado.login, nome=capturado.nome, senha=capturado.senha });
+        contextodb.TB_USUARIOS.Add(new TB_USUARIOS() { login=usuario.login, nome=usuario.nome, senha=usuario.senha });
         contextodb.SaveChanges();
+    }
+
+    public ILogin AutenticarUsuario(ILogin usuario)
+    {
+        var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login && x.senha == usuario.senha);
+        usuario.id = retorno != null ? retorno.id : 0;
+        return usuario;
     }
 }
