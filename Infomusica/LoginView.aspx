@@ -16,6 +16,7 @@
                     <asp:TextBox ID="tbSenha" runat="server" type="password" class="form-control mt-3 mb-3" placeholder="Senha" required></asp:TextBox>
 
                 <asp:Button ID="btLogin" runat="server" class="btn btn-lg btn-primary btn-block  mt-3 mb-3" type="submit" Text="Entrar"/>
+                <asp:HyperLink ID="hlCadastro" runat="server">Cadastre-se</asp:HyperLink>
             </div>
         </div>
     </div>
