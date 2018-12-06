@@ -12,7 +12,7 @@ namespace Models.db
     using System;
     using System.Collections.Generic;
     
-    public partial class TB_USUARIOS : ILogin
+    public partial class TB_USUARIOS
     {
         public int id { get; set; }
         public string nome { get; set; }

@@ -16,13 +16,13 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div class="container">
+        
             <asp:ContentPlaceHolder ID="ContentSection" runat="server">
 
 
 
             </asp:ContentPlaceHolder>
-        </div>
+        
 
         <script src="Scripts/jquery-3.3.1.js"></script>
         <script src="Scripts/bootstrap.js"></script>
