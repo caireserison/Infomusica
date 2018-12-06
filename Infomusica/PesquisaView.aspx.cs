@@ -17,10 +17,7 @@ public partial class InfoArtista : System.Web.UI.Page
 
     protected void btnBuscarArtista_Click(object sender, EventArgs e)
     {
-        //ExibirArtistas();
-        Login login = new Login();
-        //login.ObterLogin(tbArtista.Text);
-        login.IncluirLogin(new LoginEntity() { login = "erison.caires@hotmail.com", nome = "Erison", senha = "123456" });
+        ExibirArtistas();
     }
 
     private void ExibirArtistas()
