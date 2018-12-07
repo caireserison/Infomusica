@@ -26,5 +26,6 @@ namespace Models.db
         }
     
         public virtual DbSet<TB_USUARIOS> TB_USUARIOS { get; set; }
+        public virtual DbSet<TB_MUSICAS> TB_MUSICAS { get; set; }
     }
 }
