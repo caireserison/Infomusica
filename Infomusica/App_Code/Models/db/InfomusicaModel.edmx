@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="infomusicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="infomusicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_MUSICAS">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="idFaixa" />
+            <PropertyRef Name="dtInclusao" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="idFaixa" Type="int" Nullable="false" />
+          <Property Name="dtInclusao" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="TB_USUARIOS">
           <Key>
             <PropertyRef Name="id" />
@@ -15,10 +25,10 @@
           <Property Name="senha" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="infomusicaModelStoreContainer">
+          <EntitySet Name="TB_MUSICAS" EntityType="Self.TB_MUSICAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_USUARIOS" EntityType="Self.TB_USUARIOS" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="infomusicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -33,7 +43,18 @@
         </EntityType>
         <EntityContainer Name="infomusicaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TB_USUARIOS" EntityType="Self.TB_USUARIOS" />
+          <EntitySet Name="TB_MUSICAS" EntityType="infomusicaModel.TB_MUSICAS" />
         </EntityContainer>
+        <EntityType Name="TB_MUSICAS">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="idFaixa" />
+            <PropertyRef Name="dtInclusao" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="idFaixa" Type="Int32" Nullable="false" />
+          <Property Name="dtInclusao" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,6 +68,15 @@
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="senha" ColumnName="senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_MUSICAS">
+            <EntityTypeMapping TypeName="infomusicaModel.TB_MUSICAS">
+              <MappingFragment StoreEntitySet="TB_MUSICAS">
+                <ScalarProperty Name="dtInclusao" ColumnName="dtInclusao" />
+                <ScalarProperty Name="idFaixa" ColumnName="idFaixa" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
