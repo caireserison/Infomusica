@@ -124,6 +124,19 @@ public static class RestController
         return faixas;
     }
 
+    public static List<Faixas> BuscarFaixaPorTracklist(String tracklist)
+    {
+        var faixas = new List<Faixas>();
+        
+        foreach (JToken result in ResponseJsonAPI(tracklist))
+        {
+            Faixas faixa = result.ToObject<Faixas>();
+            faixas.Add(faixa);
+        }
+
+        return faixas;
+    }
+
     public static String BuscarEmbedFaixaPorId(String link)
     {
         WebClient client = new WebClient();

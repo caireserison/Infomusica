@@ -33,6 +33,11 @@ public class DeezerController : IDeezer
         return RestController.BuscarFaixaPorId(id);
     }
 
+    public List<Faixas> BuscarFaixaPorTracklist(String tracklist)
+    {
+        return RestController.BuscarFaixaPorTracklist(tracklist);
+    }
+
     public string BuscarEmbedFaixaPorId(string link)
     {
         return RestController.BuscarEmbedFaixaPorId(link);
