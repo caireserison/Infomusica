@@ -22,7 +22,7 @@
 
                 <div class="btn-toolbar mt-3 mb-3 justify-content-center" role="toolbar" aria-label="Basic example">
                     <div class="btn-group mr-2" role="group" aria-label="First group">
-                        <asp:button id="btCadastrar" runat="server" class="btn btn-lg btn-primary btn-block  " type="submit" text="Cadastrar" />
+                        <asp:button id="btCadastrar" runat="server" class="btn btn-lg btn-primary btn-block  " type="submit" text="Cadastrar" OnClick="btCadastrar_Click" />
                     </div>
                     <div class="btn-group" role="group" aria-label="First group">
                         <a href="LoginView.aspx" class="btn btn-secondary btn-lg" role="button" aria-pressed="true">Voltar</a>
