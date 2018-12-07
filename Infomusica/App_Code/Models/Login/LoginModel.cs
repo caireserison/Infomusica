@@ -29,6 +29,7 @@ public class LoginModel
     {
         var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login && x.senha == usuario.senha);
         usuario.id = retorno != null ? retorno.id : 0;
+        usuario.nome = retorno != null ? retorno.nome : null;
         return usuario;
     }
 }
