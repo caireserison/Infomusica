@@ -19,9 +19,9 @@ public partial class LoginView : System.Web.UI.Page
             // TODO: Mensagem de usuário inexistente ou inválido
             return;
         }
-        
-        
-        //TODO: REDIRECT
+
+
+        Response.Redirect("/Views/Musica/PesquisaView.aspx");
     }
 
     private void AutenticarUsuario()
