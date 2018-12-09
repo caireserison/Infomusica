@@ -30,8 +30,11 @@ public partial class InfoArtista : System.Web.UI.Page
 
     private void ExibirArtistas()
     {
-        gdArtistas.DataSource = ObterArtistas();
-        gdArtistas.DataBind();
+        //gdArtistas.DataSource = ObterArtistas();
+        //gdArtistas.DataBind();
+
+        rpPesquisa.DataSource = ObterArtistas();
+        rpPesquisa.DataBind();
     }
 
     private List<Artistas> ObterArtistas()
