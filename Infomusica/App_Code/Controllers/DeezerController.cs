@@ -40,6 +40,6 @@ public class DeezerController : IDeezer
 
     public string BuscarEmbedFaixaPorId(string link)
     {
-        return RestController.BuscarEmbedFaixaPorId(link);
+        return RestController.BuscarEmbedFaixaPorURL(link);
     }
 }

@@ -96,13 +96,13 @@
                                                         </td>
 
                                                         <td class="align-middle">
-                                                            <p><%# DataBinder.Eval(Container.DataItem, "Preview") %></p>
+                                                            <p><%# DataBinder.Eval(Container.DataItem, "Embed") %></p>
                                                         </td>
 
                                                         <td class="w-25">
                                                             <asp:Button runat="server"
                                                                 CommandName="Click"
-                                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Title") %>'
+                                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                                                 type="button"
                                                                 class="btn btn-outline-primary align-items-center float-right"
                                                                 Text="+ Selecionar"></asp:Button>

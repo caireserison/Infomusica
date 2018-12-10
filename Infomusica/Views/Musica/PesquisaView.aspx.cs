@@ -54,8 +54,7 @@ public partial class InfoArtista : System.Web.UI.Page
 
         return deezer.BuscarFaixaPorTracklist(trackList);
     }
-
-
+    
     protected void rpPesquisa_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         switch (e.CommandName)
