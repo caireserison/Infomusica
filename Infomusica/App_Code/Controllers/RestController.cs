@@ -118,6 +118,7 @@ public static class RestController
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
         {
             Faixas faixa = result.ToObject<Faixas>();
+            faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
             faixas.Add(faixa);
         }
 
