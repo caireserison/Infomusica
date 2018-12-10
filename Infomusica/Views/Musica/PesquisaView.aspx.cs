@@ -7,12 +7,20 @@ using System.Web.UI.WebControls;
 
 public partial class InfoArtista : System.Web.UI.Page
 {
-
+    Login usuario = new Login();
     DeezerController deezer = new DeezerController();
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        VerificarSession();
+    }
 
+    private void VerificarSession()
+    {
+        usuario = (Login)Session["usuario"];
+
+        if (usuario == null)
+            Response.Redirect("/Views/Login/LoginView.aspx");
     }
 
     protected void btnBuscarArtista_Click(object sender, EventArgs e)

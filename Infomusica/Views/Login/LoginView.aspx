@@ -7,7 +7,7 @@
         <div class="form-group mx-auto mt-5 mb-5 align-self-center text-center" style="background: #f4f6f9">
             <div class="col-12">
                 <div class="form-group col-sm-12 text-center">
-                    <img class="w-25 h-25 m-3" src="img/music.png" />
+                    <img class="w-25 h-25 m-3" src="../../img/Login/music.png" />
                 </div>
                 <h3 class="m-3">Efetuar Login</h3>
                 <label for="inputEmail" class="sr-only">Email</label>
@@ -16,7 +16,7 @@
                     <asp:TextBox ID="tbSenha" runat="server" type="password" class="form-control mt-3 mb-3" placeholder="Senha" required></asp:TextBox>
 
                 <asp:Button ID="btLogin" runat="server" class="btn btn-lg btn-primary btn-block  mt-3 mb-3" type="submit" Text="Entrar" OnClick="btLogin_Click"/>
-                <asp:HyperLink ID="hlCadastro" runat="server" class="" NavigateUrl="~/CadastroView.aspx">Cadastre-se</asp:HyperLink>
+                <asp:HyperLink ID="hlCadastro" runat="server" class="" NavigateUrl="~/views/Login/CadastroView.aspx">Cadastre-se</asp:HyperLink>
             </div>
         </div>
     </div>

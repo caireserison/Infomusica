@@ -19,7 +19,7 @@ public partial class CadastroView : System.Web.UI.Page
         }
 
         IncluirUsuario();
-        // TODO: REDIRECT
+        Response.Redirect("/Views/Musica/PesquisaView.aspx");
     }
 
     private bool ValidarUsuarioExistente()
@@ -32,6 +32,7 @@ public partial class CadastroView : System.Web.UI.Page
 
     private void IncluirUsuario()
     {
+        login.nome = tbNomeUsuario.Text;
         login.login = tbUsuario.Text;
         login.senha = tbSenha.Text;
 
