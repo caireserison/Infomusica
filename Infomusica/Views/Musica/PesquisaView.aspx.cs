@@ -30,9 +30,6 @@ public partial class InfoArtista : System.Web.UI.Page
 
     private void ExibirArtistas()
     {
-        //gdArtistas.DataSource = ObterArtistas();
-        //gdArtistas.DataBind();
-
         rpPesquisa.DataSource = ObterArtistas();
         rpPesquisa.DataBind();
     }
@@ -43,5 +40,37 @@ public partial class InfoArtista : System.Web.UI.Page
 
         String artista = tbArtista.Text;
         return deezer.BuscarArtistaPorNome(artista);
+    }
+
+    private void ExibirFaixas(string trackList)
+    {
+        rpPesquisaFaixa.DataSource = ObterFaixas(trackList);
+        rpPesquisaFaixa.DataBind();
+    }
+
+    private List<Faixas> ObterFaixas(string trackList)
+    {
+        List<Faixas> faixas = new List<Faixas>();
+
+        return deezer.BuscarFaixaPorTracklist(trackList);
+    }
+
+
+    protected void rpPesquisa_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        switch (e.CommandName)
+        {
+            case "Click":
+                //Recuperando o valor do Argumento.
+                string trackList = e.CommandArgument.ToString();
+
+                //txEscolhido.Text = nomeArtista.ToString();
+
+                ExibirFaixas(trackList);
+
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                break;
+        }
     }
 }

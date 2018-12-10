@@ -27,10 +27,4 @@
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ScriptSection" runat="server">
-
-    <script type="text/javascript">
-        function OpenPopUpLoginErro() {
-            $("#mdErroLogin").modal('show');
-        }
-    </script>
 </asp:Content>
