@@ -10,9 +10,19 @@ public class MusicaController
 {
     MusicaModel model = new MusicaModel();
 
-    public IMusica ObterMusica(IMusica musica)
+    public IMusica ObterMusicaPorUsuario(IMusica musica)
     {
-        return model.ObterMusica(musica);
+        return model.ObterMusicaPorUsuario(musica);
+    }
+
+    public IMusica ObterMusicaPorData(IMusica musica)
+    {
+        return model.ObterMusicaPorData(musica);
+    }
+
+    public IMusica ObterMusicaPorUsuarioData(IMusica musica)
+    {
+        return model.ObterMusicaPorUsuarioData(musica);
     }
 
     public void IncluirMusica(IMusica musica)

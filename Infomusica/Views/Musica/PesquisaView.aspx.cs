@@ -54,23 +54,28 @@ public partial class InfoArtista : System.Web.UI.Page
 
         return deezer.BuscarFaixaPorTracklist(trackList);
     }
-
-
+    
     protected void rpPesquisa_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         switch (e.CommandName)
         {
             case "Click":
-                //Recuperando o valor do Argumento.
-                string trackList = e.CommandArgument.ToString();
-
-                //txEscolhido.Text = nomeArtista.ToString();
-
-                ExibirFaixas(trackList);
-
-
+                ExibirFaixas(e.CommandArgument.ToString());
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
                 break;
         }
+    }
+
+    private bool IncluirMusica(int idMusica)
+    {
+        MusicaController controle = new MusicaController();
+        Musica musicaUsuario = (Musica)controle.ObterMusicaPorUsuarioData(new Musica() { idUsuario = usuario.id, dtInclusao = DateTime.Now.Date });
+        if (musicaUsuario.idFaixa != 0)
+        {
+            controle.IncluirMusica(new Musica() { idUsuario = usuario.id, idFaixa = idMusica, dtInclusao = DateTime.Now.Date });
+            return true;
+        }
+        
+        return false;
     }
 }

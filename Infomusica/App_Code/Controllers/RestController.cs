@@ -118,6 +118,7 @@ public static class RestController
         foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
         {
             Faixas faixa = result.ToObject<Faixas>();
+            faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
             faixas.Add(faixa);
         }
 
@@ -131,13 +132,14 @@ public static class RestController
         foreach (JToken result in ResponseJsonAPI(tracklist))
         {
             Faixas faixa = result.ToObject<Faixas>();
+            faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
             faixas.Add(faixa);
         }
 
         return faixas;
     }
 
-    public static String BuscarEmbedFaixaPorId(String link)
+    public static String BuscarEmbedFaixaPorURL(String link)
     {
         WebClient client = new WebClient();
         IList<JToken> results;
@@ -147,7 +149,7 @@ public static class RestController
         String json = client.DownloadString(String.Format(uri, link));
         JObject objeto = JObject.Parse(json);
         results = objeto.Children().ToList();
-        String embed = results[0]["html"].ToString();
+        String embed = ((JValue)((JProperty)results[7]).Value).Value.ToString();
 
         return embed;
     }

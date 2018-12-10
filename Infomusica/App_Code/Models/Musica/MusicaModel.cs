@@ -11,18 +11,36 @@ public class MusicaModel
 {
     infomusicaEntities contextodb = new infomusicaEntities();
 
-    public IMusica ObterMusica(IMusica musica)
+    public IMusica ObterMusicaPorUsuario(IMusica musica)
     {
         var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.idUsuario == musica.idUsuario);
-        musica.idUsuario = retorno != null ? retorno.idUsuario : 0;
-        musica.idFaixa = retorno != null ? retorno.idFaixa : 0;
-        musica.dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue;
-        return musica;
+        return AtribuirPropriedadesMusica(musica, retorno);
+    }
+    
+    public IMusica ObterMusicaPorData(IMusica musica)
+    {
+        var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.dtInclusao == musica.dtInclusao);
+        return AtribuirPropriedadesMusica(musica, retorno);
+    }
+
+    public IMusica ObterMusicaPorUsuarioData(IMusica musica)
+    {
+        var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.idUsuario == musica.idUsuario && x.dtInclusao == musica.dtInclusao);
+        return AtribuirPropriedadesMusica(musica, retorno);
     }
 
     public void IncluirMusica(IMusica musica)
     {
         contextodb.TB_MUSICAS.Add(new TB_MUSICAS() { idUsuario = musica.idUsuario, idFaixa = musica.idFaixa, dtInclusao = musica.dtInclusao });
         contextodb.SaveChanges();
+    }
+
+    private static IMusica AtribuirPropriedadesMusica(IMusica musica, TB_MUSICAS retorno)
+    {
+        musica.idUsuario = retorno != null ? retorno.idUsuario : 0;
+        musica.idFaixa = retorno != null ? retorno.idFaixa : 0;
+        musica.dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue;
+
+        return musica;
     }
 }

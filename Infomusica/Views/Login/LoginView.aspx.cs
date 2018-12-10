@@ -15,12 +15,9 @@ public partial class LoginView : System.Web.UI.Page
         AutenticarUsuario();
 
         if (login.id == 0)
-        {
-            // TODO: Mensagem de usuário inexistente ou inválido
             Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "OpenPopUpLoginErro()", true);
-            //return;
-        }
-        Response.Redirect("/Views/Musica/PesquisaView.aspx");
+        else
+            Response.Redirect("/Views/Musica/PesquisaView.aspx");
     }
 
     private void AutenticarUsuario()
