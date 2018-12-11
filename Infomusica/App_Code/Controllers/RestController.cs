@@ -145,12 +145,22 @@ public static class RestController
         IList<JToken> results;
 
         var uri = ConfigurationManager.AppSettings["DeezerEmbedFaixa"].ToString();
-        
+
         String json = client.DownloadString(String.Format(uri, link));
         JObject objeto = JObject.Parse(json);
         results = objeto.Children().ToList();
         String embed = ((JValue)((JProperty)results[7]).Value).Value.ToString();
+        embed = ConfiguracaoTamanhoEmbed(embed);
 
+        return embed;
+    }
+
+    private static string ConfiguracaoTamanhoEmbed(string embed)
+    {
+        embed = embed.Replace("width=700", "width=600");
+        embed = embed.Replace("width='700'", "width='600'");
+        embed = embed.Replace("height=240", "height=90");
+        embed = embed.Replace("height='240'", "height='90'");
         return embed;
     }
 }
