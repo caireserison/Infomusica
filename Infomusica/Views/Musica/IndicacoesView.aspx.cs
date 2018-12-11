@@ -14,6 +14,7 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         VerificarSession();
+        CarregarIndicacoes();
     }
 
     private void VerificarSession()
@@ -26,8 +27,8 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
 
     private void CarregarIndicacoes()
     {
-        //grid = ObterIndicacoes();
-        //grid blind
+        rpMusicas.DataSource = ObterIndicacoes();
+        rpMusicas.DataBind();
     }
 
     //private void CarregarIndicacoesUsuario()
