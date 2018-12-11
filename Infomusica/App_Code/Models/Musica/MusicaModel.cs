@@ -14,19 +14,24 @@ public class MusicaModel
     public IMusica ObterMusicaPorUsuario(IMusica musica)
     {
         var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.idUsuario == musica.idUsuario);
-        return AtribuirPropriedadesMusica(musica, retorno);
+        return AtribuirPropriedadesMusica(retorno);
     }
     
-    public IMusica ObterMusicaPorData(IMusica musica)
+    public List<Musica> ObterMusicaPorData(IMusica musica)
     {
-        var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.dtInclusao == musica.dtInclusao);
-        return AtribuirPropriedadesMusica(musica, retorno);
+        List<Musica> musicas = new List<Musica>();
+        var retorno = contextodb.TB_MUSICAS.Where(x => x.dtInclusao == musica.dtInclusao).ToList<TB_MUSICAS>();
+
+        foreach (var item in retorno)
+            musicas.Add((Musica)AtribuirPropriedadesMusica(item));
+        
+        return musicas;
     }
 
     public IMusica ObterMusicaPorUsuarioData(IMusica musica)
     {
         var retorno = contextodb.TB_MUSICAS.FirstOrDefault(x => x.idUsuario == musica.idUsuario && x.dtInclusao == musica.dtInclusao);
-        return AtribuirPropriedadesMusica(musica, retorno);
+        return AtribuirPropriedadesMusica(retorno);
     }
 
     public void IncluirMusica(IMusica musica)
@@ -35,12 +40,12 @@ public class MusicaModel
         contextodb.SaveChanges();
     }
 
-    private static IMusica AtribuirPropriedadesMusica(IMusica musica, TB_MUSICAS retorno)
+    private static IMusica AtribuirPropriedadesMusica(TB_MUSICAS retorno)
     {
-        musica.idUsuario = retorno != null ? retorno.idUsuario : 0;
-        musica.idFaixa = retorno != null ? retorno.idFaixa : 0;
-        musica.dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue;
-
-        return musica;
+        return new Musica() {
+            idUsuario = retorno != null ? retorno.idUsuario : 0,
+            idFaixa = retorno != null ? retorno.idFaixa : 0,
+            dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue
+        };
     }
 }
