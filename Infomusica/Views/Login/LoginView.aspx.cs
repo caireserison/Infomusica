@@ -15,7 +15,7 @@ public partial class LoginView : System.Web.UI.Page
         AutenticarUsuario();
 
         if (login.id == 0)
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "OpenPopUpLoginErro()", true);
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "openModal()", true);
         else
             Response.Redirect("/Views/Musica/PesquisaView.aspx");
     }
