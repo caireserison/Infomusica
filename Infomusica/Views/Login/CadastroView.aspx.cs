@@ -14,7 +14,7 @@ public partial class CadastroView : System.Web.UI.Page
     {
         if (ValidarUsuarioExistente())
         {
-            // TODO: Mensagem de usuário existente (ou validar senha e logar)
+            Response.Redirect("/Views/Login/LoginView.aspx");
             return;
         }
 

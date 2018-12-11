@@ -47,7 +47,7 @@
                                         CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Tracklist") %>'
                                         type="button"
                                         class="btn btn-outline-primary align-items-center float-right"
-                                        Text="+ Selecionar"></asp:Button>
+                                        Text="Selecionar"></asp:Button>
                                 </td>
                             </tr>
                         </tbody>
@@ -58,8 +58,8 @@
                 </asp:Repeater>
             </div>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+            <div class="modal fade  bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <span class="modal-title" id="exampleModalLabel">Você escolheu: 
@@ -73,47 +73,33 @@
                                 <div class="form-group">
 
                                     <h3>Escolha uma musica abaixo:</h3>
-                                    <!--Repeater do Resultado de Pesquisa-->
                                     <div class="table-responsive">
-                                        <asp:Repeater ID="rpPesquisaFaixa" runat="server" OnItemCommand="rpPesquisa_ItemCommand">
+
+
+                                        <!--Repeater do Resultado de Pesquisa-->
+                                        <asp:Repeater ID="rpPesquisaFaixa" runat="server" OnItemCommand="rpPesquisaFaixa_ItemCommand">
                                             <HeaderTemplate>
-                                                <table class="table table-hover table-light mx-auto">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">#</th>
-                                                            <th scope="col">Nome</th>
-                                                            <th scope="col">Preview</th>
-                                                            <th scope="col">Adicionar</th>
-                                                        </tr>
-                                                    </thead>
+                                                <ul class="list-unstyled">
                                             </HeaderTemplate>
                                             <ItemTemplate>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row"><%# Container.ItemIndex + 1 %></th>
-                                                        <td>
-                                                            <p><%# DataBinder.Eval(Container.DataItem, "Title") %></p>    
-                                                        </td>
-
-                                                        <td class="align-middle">
-                                                            <p><%# DataBinder.Eval(Container.DataItem, "Preview") %></p>
-                                                        </td>
-
-                                                        <td class="w-25">
-                                                            <asp:Button runat="server"
+                                                <li class="media">
+                                                     <asp:Button runat="server"
                                                                 CommandName="Click"
-                                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Title") %>'
+                                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                                                 type="button"
-                                                                class="btn btn-outline-primary align-items-center float-right"
-                                                                Text="+ Selecionar"></asp:Button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
+                                                                class="mt-5 mb-5 mr-3 btn btn-outline-primary align-items-center float-left"
+                                                                Text="Selecionar"></asp:Button>
+                                                    <div class="media-body mb-2">
+                                                        <h5 class="mt-0 mb-1"><%# DataBinder.Eval(Container.DataItem, "Title") %></h5>
+                                                        <%# DataBinder.Eval(Container.DataItem, "Embed") %>
+                                                    </div>
+                                                </li>
                                             </ItemTemplate>
                                             <FooterTemplate>
-                                                </table>
+                                                </ul>
                                             </FooterTemplate>
                                         </asp:Repeater>
+                                        <!--Fim Repeater-->
                                     </div>
                                 </div>
                             </form>
