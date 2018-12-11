@@ -9,6 +9,7 @@ using System.Web;
 public class MusicaController
 {
     MusicaModel modelMusica = new MusicaModel();
+    LoginModel modelUsuario = new LoginModel();
     DeezerController deezer = new DeezerController();
 
     public IMusica ObterMusicaPorUsuario(IMusica musica)
@@ -27,6 +28,8 @@ public class MusicaController
 
             indicacoes.Add(
                 new Indicacao() {
+                    NomeUsuario = modelUsuario.ObterUsuario(new Login() { id = item.idUsuario }).nome,
+                    NomeMusica = faixa[0].Title,
                     NomeArtista = faixa[0].Artist.Name,
                     URLFotoArtista = faixa[0].Artist.Picture_medium,
                     NomeAlbum = "",

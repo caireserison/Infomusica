@@ -9,6 +9,7 @@ using System.Web;
 public class Indicacao
 {
     public String NomeUsuario { get; set; }
+    public String NomeMusica { get; set; }
     public String NomeArtista { get; set; }
     public String URLFotoArtista { get; set; }
     public String NomeAlbum { get; set; }
