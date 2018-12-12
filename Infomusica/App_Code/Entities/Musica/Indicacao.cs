@@ -8,6 +8,7 @@ using System.Web;
 /// </summary>
 public class Indicacao
 {
+    public long IdMusica { get; set; }
     public String NomeUsuario { get; set; }
     public String NomeMusica { get; set; }
     public String NomeArtista { get; set; }

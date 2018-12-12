@@ -30,6 +30,16 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
         rpMusicas.DataSource = ObterIndicacoes();
         rpMusicas.DataBind();
     }
+    
+    private List<Indicacao> ObterIndicacoes()
+    {
+        return controle.ObterMusicaPorData(new Musica() { dtInclusao = DateTime.Now.Date });
+    }
+
+    private void RemoverMusica()
+    {
+        controle.RemoverMusica(new Musica() { idUsuario = usuario.id, dtInclusao = DateTime.Now.Date });
+    }
 
     //private void CarregarIndicacoesUsuario()
     //{
@@ -37,11 +47,6 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
     //    //grid blind
     //}
 
-    private List<Indicacao> ObterIndicacoes()
-    {
-        return controle.ObterMusicaPorData(new Musica() { dtInclusao = DateTime.Now.Date });
-    }
-    
     //private Musica ObterIndicacoesUsuario()
     //{
     //    return (Musica)controle.ObterMusicaPorUsuarioData(new Musica() { dtInclusao = DateTime.Now.Date, idUsuario = usuario.id });

@@ -48,4 +48,10 @@ public class MusicaModel
             dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue
         };
     }
+
+    public void RemoverMusicaPorUsuarioData(IMusica musica)
+    {
+        contextodb.TB_MUSICAS.Remove(new TB_MUSICAS() { idUsuario = musica.idUsuario, dtInclusao = musica.dtInclusao });
+        contextodb.SaveChanges();
+    }
 }
