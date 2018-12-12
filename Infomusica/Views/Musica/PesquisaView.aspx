@@ -24,7 +24,7 @@
                     <ItemTemplate>
                         <tbody>
                             <tr class="row">
-                                 <td class="col-sm-2 text-center">
+                                 <td class="ml-3 col-xs-2 text-center">
                                     <asp:Button runat="server"
                                         CommandName="Click"
                                         CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Tracklist") %>'
@@ -36,7 +36,7 @@
                                     <img src='<%# DataBinder.Eval(Container.DataItem, "Picture_medium") %>' alt="Alternate Text" style="width: 100px" />
                                 </td>
 
-                                <td class="col-sm-3 align-middle">
+                                <td class="col-xs-3 align-middle">
                                     <h3><%# DataBinder.Eval(Container.DataItem, "Name") %></h3>
                                 </td>
                             </tr>
