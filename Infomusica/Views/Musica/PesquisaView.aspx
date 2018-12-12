@@ -83,12 +83,12 @@
                                             </HeaderTemplate>
                                             <ItemTemplate>
                                                 <li class="media">
-                                                     <asp:Button runat="server"
-                                                                CommandName="Click"
-                                                                CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
-                                                                type="button"
-                                                                class="mt-5 mb-5 mr-3 btn btn-outline-primary align-items-center float-left"
-                                                                Text="Selecionar"></asp:Button>
+                                                    <asp:Button runat="server"
+                                                        CommandName="Click"
+                                                        CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
+                                                        type="button"
+                                                        class="mt-5 mb-5 mr-3 btn btn-outline-primary align-items-center float-left"
+                                                        Text="Selecionar"></asp:Button>
                                                     <div class="media-body mb-2">
                                                         <h5 class="mt-0 mb-1"><%# DataBinder.Eval(Container.DataItem, "Title") %></h5>
                                                         <%# DataBinder.Eval(Container.DataItem, "Embed") %>
@@ -103,10 +103,6 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send message</button>
                         </div>
                     </div>
                 </div>
