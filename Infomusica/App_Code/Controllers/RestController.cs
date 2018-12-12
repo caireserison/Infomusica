@@ -110,19 +110,19 @@ public static class RestController
         return faixas;
     }
 
-    public static List<Faixas> BuscarFaixaPorId(long id)
+    public static Faixas BuscarFaixaPorId(long id)
     {
-        var faixas = new List<Faixas>();
+        WebClient client = new WebClient();
+        var faixa = new Faixas();
 
         var uri = ConfigurationManager.AppSettings["DeezerFaixa"].ToString();
-        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
-        {
-            Faixas faixa = result.ToObject<Faixas>();
-            faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
-            faixas.Add(faixa);
-        }
+        String json = client.DownloadString(String.Format(uri, id));
+        var resultado = JObject.Parse(json);
 
-        return faixas;
+        faixa = JObject.Parse(resultado.ToString()).ToObject<Faixas>();
+        faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
+        
+        return faixa;
     }
 
     public static List<Faixas> BuscarFaixaPorTracklist(String tracklist)

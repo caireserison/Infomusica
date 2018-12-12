@@ -13,12 +13,14 @@ public class Faixas
     private String link;
     private String preview;
     private Artistas artist;
+    private Albuns album;
     private String embed;
-    
+
     public string Title { get => title; set => title = value; }
     public string Link { get => link; set => link = value; }
     public string Preview { get => preview; set => preview = value; }
     public Artistas Artist { get => artist; set => artist = value; }
     public string Embed { get => embed; set => embed = value; }
     public long Id { get => id; set => id = value; }
+    public Albuns Album { get => album; set => album = value; }
 }

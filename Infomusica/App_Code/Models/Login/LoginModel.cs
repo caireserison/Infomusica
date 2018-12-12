@@ -12,6 +12,15 @@ public class LoginModel
 {
     infomusicaEntities contextodb = new infomusicaEntities();
 
+    public ILogin ObterUsuarioPorID(ILogin usuario)
+    {
+        var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.id == usuario.id);
+        usuario.id = retorno != null ? retorno.id : 0;
+        usuario.login = retorno != null ? retorno.login : String.Empty;
+        usuario.nome = retorno != null ? retorno.nome : String.Empty;
+        return usuario;
+    }
+
     public ILogin ObterUsuario(ILogin usuario)
     {
         var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login);

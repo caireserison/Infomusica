@@ -12,6 +12,6 @@ public interface IDeezer
     List<Artistas> BuscarArtistaPorNome(String nome);
     List<Albuns> BuscarAlbumPorId(long id);
     List<Faixas> BuscarFaixaAlbumPorId(long id);
-    List<Faixas> BuscarFaixaPorId(long id);
+    Faixas BuscarFaixaPorId(long id);
     String BuscarEmbedFaixaPorId(String link);
 }
