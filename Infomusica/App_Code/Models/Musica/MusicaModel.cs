@@ -51,7 +51,8 @@ public class MusicaModel
 
     public void RemoverMusicaPorUsuarioData(IMusica musica)
     {
-        contextodb.TB_MUSICAS.Remove(new TB_MUSICAS() { idUsuario = musica.idUsuario, dtInclusao = musica.dtInclusao });
+        var deletar = contextodb.TB_MUSICAS.Where(x => x.idUsuario == musica.idUsuario && x.dtInclusao == musica.dtInclusao).FirstOrDefault();
+        contextodb.TB_MUSICAS.Remove(deletar);
         contextodb.SaveChanges();
     }
 }
