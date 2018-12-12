@@ -12,6 +12,7 @@ public partial class LoginView : System.Web.UI.Page
 
     protected void btLogin_Click(object sender, EventArgs e)
     {
+        ObterCampos();
         AutenticarUsuario();
 
         if (login.id == 0)
@@ -22,10 +23,13 @@ public partial class LoginView : System.Web.UI.Page
 
     private void AutenticarUsuario()
     {
-        login.login = tbUsuario.Text.Trim();
-        login.senha = tbSenha.Text.Trim();
-
         login = (Login)controle.AutenticarUsuario(login);
         Session["usuario"] = login;
+    }
+
+    private void ObterCampos()
+    {
+        login.login = tbUsuario.Text.Trim();
+        login.senha = tbSenha.Text.Trim();
     }
 }

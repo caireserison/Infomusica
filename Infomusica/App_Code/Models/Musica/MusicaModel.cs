@@ -39,20 +39,21 @@ public class MusicaModel
         contextodb.TB_MUSICAS.Add(new TB_MUSICAS() { idUsuario = musica.idUsuario, idFaixa = musica.idFaixa, dtInclusao = musica.dtInclusao });
         contextodb.SaveChanges();
     }
-
-    private static IMusica AtribuirPropriedadesMusica(TB_MUSICAS retorno)
-    {
-        return new Musica() {
-            idUsuario = retorno != null ? retorno.idUsuario : 0,
-            idFaixa = retorno != null ? retorno.idFaixa : 0,
-            dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue
-        };
-    }
-
+    
     public void RemoverMusicaPorUsuarioData(IMusica musica)
     {
         var deletar = contextodb.TB_MUSICAS.Where(x => x.idUsuario == musica.idUsuario && x.dtInclusao == musica.dtInclusao).FirstOrDefault();
         contextodb.TB_MUSICAS.Remove(deletar);
         contextodb.SaveChanges();
+    }
+
+    private static IMusica AtribuirPropriedadesMusica(TB_MUSICAS retorno)
+    {
+        return new Musica()
+        {
+            idUsuario = retorno != null ? retorno.idUsuario : 0,
+            idFaixa = retorno != null ? retorno.idFaixa : 0,
+            dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue
+        };
     }
 }

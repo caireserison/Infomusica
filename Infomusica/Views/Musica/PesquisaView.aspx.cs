@@ -21,7 +21,6 @@ public partial class InfoArtista : System.Web.UI.Page
     private void VerificarSession()
     {
         usuario = (Login)Session["usuario"];
-
         if (usuario == null)
             Response.Redirect("/Views/Login/LoginView.aspx");
     }

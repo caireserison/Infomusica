@@ -12,6 +12,8 @@ public partial class CadastroView : System.Web.UI.Page
 
     protected void btCadastrar_Click(object sender, EventArgs e)
     {
+        ObterCampos();
+
         if (ValidarUsuarioExistente())
         {
             Response.Redirect("/Views/Login/LoginView.aspx");
@@ -24,20 +26,20 @@ public partial class CadastroView : System.Web.UI.Page
 
     private bool ValidarUsuarioExistente()
     {
-        login.login = tbUsuario.Text;
-        login.senha = tbSenha.Text;
-        
-        return controle.ObterUsuario(login).id > 0 ? true : false;
+        return controle.ObterUsuarioPorLogin(login).id > 0 ? true : false;
     }
 
     private void IncluirUsuario()
     {
+        controle.IncluirUsuario(login);
+        controle.ObterUsuarioPorLogin(login);
+        Session["usuario"] = login;
+    }
+
+    private void ObterCampos()
+    {
         login.nome = tbNomeUsuario.Text;
         login.login = tbUsuario.Text;
         login.senha = tbSenha.Text;
-
-        controle.IncluirUsuario(login);
-        controle.ObterUsuario(login);
-        Session["usuario"] = login;
     }
 }
