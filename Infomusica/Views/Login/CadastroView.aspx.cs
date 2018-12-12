@@ -32,7 +32,7 @@ public partial class CadastroView : System.Web.UI.Page
     private void IncluirUsuario()
     {
         controle.IncluirUsuario(login);
-        controle.ObterUsuarioPorLogin(login);
+        login = (Login)controle.ObterUsuarioPorLogin(login);
         Session["usuario"] = login;
     }
 

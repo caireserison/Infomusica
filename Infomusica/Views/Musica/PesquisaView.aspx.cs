@@ -82,10 +82,8 @@ public partial class InfoArtista : System.Web.UI.Page
             controle.IncluirMusica(new Musica() { idUsuario = usuario.id, idFaixa = idMusica, dtInclusao = DateTime.Now.Date });
             return true;
         }
-        else
-        {
-            return false;
-        }
+        
+        return false;
     }
 
     protected void rpPesquisaFaixa_ItemCommand(object source, RepeaterCommandEventArgs e)

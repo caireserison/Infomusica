@@ -45,12 +45,8 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
     protected void rpMusicas_ItemCreated(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.DataItem != null)
-        {
             if ((e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) && ((Indicacao)e.Item.DataItem).IdUsuario != usuario.id)
-            {
                 e.Item.FindControl("btnRemover").Visible = false;
-            }
-        }
     }
 
     protected void rpMusicas_ItemCommand(object source, RepeaterCommandEventArgs e)
@@ -59,9 +55,6 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
         {
             case "Remove":
                 RemoverMusica();
-                Response.Redirect("/Views/Musica/PesquisaView.aspx");
-                break;
-            case "Click":
                 Response.Redirect("/Views/Musica/PesquisaView.aspx");
                 break;
         }
