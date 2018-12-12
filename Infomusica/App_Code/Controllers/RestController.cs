@@ -13,71 +13,15 @@ using System.Web;
 /// </summary>
 public static class RestController
 {
-    private static IList<JToken> ResponseJsonAPI(String api)
-    {
-        WebClient client = new WebClient();
-        IList<JToken> results;
-
-        String json = client.DownloadString(api);
-        JObject objeto = JObject.Parse(json);
-        if (objeto["data"] != null)
-            results = objeto["data"].Children().ToList();
-        else
-            results = objeto.Children().ToList();
-
-        return results;
-    }
-
-    private static IList<JToken> ResponseJsonGenericoAPI(String api)
-    {
-        WebClient client = new WebClient();
-        IList<JToken> results;
-
-        String json = client.DownloadString(api);
-        JObject objeto = JObject.Parse(json);
-
-        results = objeto["tracks"]["data"].Children().ToList();
-
-        return results;
-    }
-
-    public static Generico BuscarGenerico(String nome)
-    {
-        Generico generico = new Generico();
-        var uri = ConfigurationManager.AppSettings["DeezerBuscaGenerica"].ToString();
-        foreach (JToken result in ResponseJsonGenericoAPI(String.Format(uri, nome)))
-        {
-            String tipo = result["type"].ToString();
-
-            switch ((TypeDeezer)Enum.Parse(typeof(TypeDeezer), tipo))
-            {
-                case TypeDeezer.artist:
-                    generico.Artistas.Add(result.ToObject<Artistas>());
-                    break;
-                case TypeDeezer.album:
-                    generico.Albuns.Add(result.ToObject<Albuns>());
-                    break;
-                case TypeDeezer.track:
-                    generico.Faixas.Add(result.ToObject<Faixas>());
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        return generico;
-    }
-
+    private static WebClient client = new WebClient();
+    private static IList<JToken> results;
+    
     public static List<Artistas> BuscarArtistaPorNome(String nome)
     {
         var artistas = new List<Artistas>();
-
         var uri = ConfigurationManager.AppSettings["DeezerArtista"].ToString();
-        foreach (JToken result in ResponseJsonAPI(String.Format(uri, nome)))
-        {
-            Artistas artista = result.ToObject<Artistas>();
-            artistas.Add(artista);
-        }
+        foreach (JToken result in ResponseJsonGenericoAPI(String.Format(uri, nome)))
+            artistas.Add(result.ToObject<Artistas>());
 
         return artistas;
     }
@@ -85,23 +29,19 @@ public static class RestController
     public static List<Albuns> BuscarAlbumPorId(long id)
     {
         var albuns = new List<Albuns>();
-
         var uri = ConfigurationManager.AppSettings["DeezerAlbum"].ToString();
-        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
-        {
-            Albuns album = result.ToObject<Albuns>();
-            albuns.Add(album);
-        }
+        foreach (JToken result in ResponseJsonGenericoAPI(String.Format(uri, id)))
+            albuns.Add(result.ToObject<Albuns>());
 
         return albuns;
     }
 
-    public static List<Faixas> BuscarFaixaAlbumPorId(long id)
+    public static List<Faixas> BuscarFaixasAlbumPorId(long id)
     {
         var faixas = new List<Faixas>();
 
         var uri = ConfigurationManager.AppSettings["DeezerFaixaAlbum"].ToString();
-        foreach (JToken result in ResponseJsonAPI(String.Format(uri, id)))
+        foreach (JToken result in ResponseJsonGenericoAPI(String.Format(uri, id)))
         {
             Faixas faixa = result.ToObject<Faixas>();
             faixas.Add(faixa);
@@ -112,13 +52,10 @@ public static class RestController
 
     public static Faixas BuscarFaixaPorId(long id)
     {
-        WebClient client = new WebClient();
         var faixa = new Faixas();
-
         var uri = ConfigurationManager.AppSettings["DeezerFaixa"].ToString();
         String json = client.DownloadString(String.Format(uri, id));
         var resultado = JObject.Parse(json);
-
         faixa = JObject.Parse(resultado.ToString()).ToObject<Faixas>();
         faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
         
@@ -129,7 +66,7 @@ public static class RestController
     {
         var faixas = new List<Faixas>();
         
-        foreach (JToken result in ResponseJsonAPI(tracklist))
+        foreach (JToken result in ResponseJsonGenericoAPI(tracklist))
         {
             Faixas faixa = result.ToObject<Faixas>();
             faixa.Embed = BuscarEmbedFaixaPorURL(faixa.Link);
@@ -155,6 +92,33 @@ public static class RestController
         return embed;
     }
 
+    public static Generico BuscarGenerico(String nome)
+    {
+        Generico generico = new Generico();
+        var uri = ConfigurationManager.AppSettings["DeezerBuscaGenerica"].ToString();
+        foreach (JToken result in ResponseJsonTracksAPI(String.Format(uri, nome)))
+        {
+            String tipo = result["type"].ToString();
+
+            switch ((TypeDeezer)Enum.Parse(typeof(TypeDeezer), tipo))
+            {
+                case TypeDeezer.artist:
+                    generico.Artistas.Add(result.ToObject<Artistas>());
+                    break;
+                case TypeDeezer.album:
+                    generico.Albuns.Add(result.ToObject<Albuns>());
+                    break;
+                case TypeDeezer.track:
+                    generico.Faixas.Add(result.ToObject<Faixas>());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return generico;
+    }
+
     private static string ConfiguracaoTamanhoEmbed(string embed)
     {
         embed = embed.Replace("width=700", "width=600");
@@ -162,6 +126,28 @@ public static class RestController
         embed = embed.Replace("height=240", "height=90");
         embed = embed.Replace("height='240'", "height='90'");
         return embed;
+    }
+
+    private static IList<JToken> ResponseJsonGenericoAPI(String api)
+    {
+        String json = client.DownloadString(api);
+        JObject objeto = JObject.Parse(json);
+        if (objeto["data"] != null)
+            results = objeto["data"].Children().ToList();
+        else
+            results = objeto.Children().ToList();
+
+        return results;
+    }
+
+    private static IList<JToken> ResponseJsonTracksAPI(String api)
+    {
+        String json = client.DownloadString(api);
+        JObject objeto = JObject.Parse(json);
+
+        results = objeto["tracks"]["data"].Children().ToList();
+
+        return results;
     }
 }
 

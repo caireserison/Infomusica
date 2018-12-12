@@ -25,9 +25,9 @@ public class LoginController
     /// </summary>
     /// <param name="login">Objeto contendo o login do usuário</param>
     /// <returns>Retorna objeto com o id do usuário</returns>
-    public ILogin ObterUsuario(ILogin login)
+    public ILogin ObterUsuarioPorLogin(ILogin login)
     {
-        return model.ObterUsuario(login);
+        return model.ObterUsuarioPorLogin(login);
     }
     
     /// <summary>

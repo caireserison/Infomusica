@@ -25,7 +25,7 @@ public class DeezerController : IDeezer
 
     public List<Faixas> BuscarFaixaAlbumPorId(long id)
     {
-        return RestController.BuscarFaixaAlbumPorId(id);
+        return RestController.BuscarFaixasAlbumPorId(id);
     }
 
     public Faixas BuscarFaixaPorId(long id)
