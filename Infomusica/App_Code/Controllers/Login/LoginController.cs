@@ -11,6 +11,16 @@ public class LoginController
     LoginModel model = new LoginModel();
 
     /// <summary>
+    /// Capturar usuário
+    /// </summary>
+    /// <param name="login">Objeto contendo o id do usuário</param>
+    /// <returns>Retorna objeto com do usuário</returns>
+    public ILogin ObterUsuarioPorID(ILogin login)
+    {
+        return model.ObterUsuarioPorID(login);
+    }
+
+    /// <summary>
     /// Capturar id do usuário
     /// </summary>
     /// <param name="login">Objeto contendo o login do usuário</param>

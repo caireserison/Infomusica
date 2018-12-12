@@ -5,7 +5,7 @@
 <asp:Content ID="ConteudoArtista" ContentPlaceHolderID="ContentSection" runat="server">
     <div class="container">
         <div class="jumbotron">
-            <h3>Veja as recomendações musicais dos seus amigos na data de hoje:</h3>
+            <h3>Veja as recomendações musicais na data de hoje:</h3>
             <br />
             <div class="table">
             <!--Repeater do Resultado de Pesquisa-->
@@ -17,12 +17,12 @@
                     <ItemTemplate>
                         <div class="col-sm-4 mb-4">
                             <div class="card p-2">
-                                <h4 class="card-title">'<%# DataBinder.Eval(Container.DataItem, "NomeUsuario") %>'</h4>
-                                <img class="card-img-top img-fluid" src='<%# DataBinder.Eval(Container.DataItem, "URLFotoArtista") %>' alt="Card image cap">
+                                <h4 class="card-title"><%# DataBinder.Eval(Container.DataItem, "NomeUsuario") %></h4>
+                                <img class="card-img-top img-fluid" src=<%# DataBinder.Eval(Container.DataItem, "URLFotoArtista") %> alt="Card image cap">
                                 <div class="card-block">
-                                    <h4 class="card-title">'<%# DataBinder.Eval(Container.DataItem, "NomeArtista") %>'</h4>
-                                    <p class="card-text">'<%# DataBinder.Eval(Container.DataItem, "NomeArtista") %>'</p>
-                                    <p class="card-text"><small class="text-muted">'<%# DataBinder.Eval(Container.DataItem, "NomeAlbum") %>'</small></p>
+                                    <h4 class="card-title"><%# DataBinder.Eval(Container.DataItem, "NomeMusica") %></h4>
+                                    <p class="card-text"><%# DataBinder.Eval(Container.DataItem, "NomeArtista") %></p>
+                                    <p class="card-text"><small class="text-muted"><%# DataBinder.Eval(Container.DataItem, "NomeAlbum") %></small></p>
                                 </div>
                             </div>
                         </div>

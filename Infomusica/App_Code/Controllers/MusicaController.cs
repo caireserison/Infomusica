@@ -9,6 +9,7 @@ using System.Web;
 public class MusicaController
 {
     MusicaModel modelMusica = new MusicaModel();
+    LoginModel modelUsuario = new LoginModel();
     DeezerController deezer = new DeezerController();
 
     public IMusica ObterMusicaPorUsuario(IMusica musica)
@@ -24,13 +25,15 @@ public class MusicaController
         foreach (var item in musicas)
         {
             var faixa = deezer.BuscarFaixaPorId(item.idFaixa);
-
+            
             indicacoes.Add(
                 new Indicacao() {
-                    NomeArtista = faixa[0].Artist.Name,
-                    URLFotoArtista = faixa[0].Artist.Picture_medium,
-                    NomeAlbum = "",
-                    Embed = faixa[0].Embed
+                    NomeUsuario = modelUsuario.ObterUsuarioPorID(new Login() { id = item.idUsuario }).nome,
+                    NomeMusica = faixa.Title,
+                    NomeArtista = faixa.Artist.Name,
+                    URLFotoArtista = faixa.Artist.Picture_medium,
+                    NomeAlbum = faixa.Album.Title,
+                    Embed = faixa.Embed
                 }
             );
         }
