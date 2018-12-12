@@ -29,6 +29,7 @@ public class MusicaController
             indicacoes.Add(
                 new Indicacao() {
                     IdMusica = faixa.Id,
+                    IdUsuario = item.idUsuario,
                     NomeUsuario = modelUsuario.ObterUsuarioPorID(new Login() { id = item.idUsuario }).nome,
                     NomeMusica = faixa.Title,
                     NomeArtista = faixa.Artist.Name,

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="IndicacoesView.aspx.cs" Inherits="Views_Musica_IndicacoesView" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="IndicacoesView.aspx.cs" Inherits="Views_Musica_IndicacoesView"  %>
 
 <asp:Content ID="Style" ContentPlaceHolderID="StyleSelection" runat="server">
 </asp:Content>
@@ -8,10 +8,10 @@
             <h3>Veja as recomendações musicais na data de hoje:</h3>
             <br />
             <div class="table">
-            <!--Repeater do Resultado de Pesquisa-->
-                <asp:Repeater ID="rpMusicas" runat="server">
+                <!--Repeater do Resultado de Pesquisa-->
+                <asp:repeater id="rpMusicas" runat="server" OnItemCreated="rpMusicas_ItemCreated" OnItemCommand="rpMusicas_ItemCommand">
                     <HeaderTemplate>
-                        <div class="table">
+                        <div class="table bg-transparent">
                             <div class="row">
                     </HeaderTemplate>
                     <ItemTemplate>
@@ -20,20 +20,39 @@
                                 <h4 class="card-title"><%# DataBinder.Eval(Container.DataItem, "NomeUsuario") %></h4>
                                 <img class="card-img-top img-fluid" src=<%# DataBinder.Eval(Container.DataItem, "URLFotoArtista") %> alt="Card image cap">
                                 <div class="card-block">
-                                    <h4 class="card-title"><%# DataBinder.Eval(Container.DataItem, "NomeMusica") %></h4>
-                                    <p class="card-text"><%# DataBinder.Eval(Container.DataItem, "NomeArtista") %></p>
-                                    <p class="card-text"><small class="text-muted"><%# DataBinder.Eval(Container.DataItem, "NomeAlbum") %></small></p>
+                                    <dl>
+                                        <dt><%# DataBinder.Eval(Container.DataItem, "NomeMusica") %></dt>
+                                        <dd>- <%# DataBinder.Eval(Container.DataItem, "NomeArtista") %> / <%# DataBinder.Eval(Container.DataItem, "NomeAlbum") %></dd>
+                                    </dl>
                                 </div>
-                            </div>
+                                <div class="container-fluid text-center"> 
+                                <div class=" btn-group btn-group-sm">
+                                <asp:Button runat="server"
+                                            id="btnRemover"
+                                            CommandName="Remove"
+                                            CommandArgument='<%# DataBinder.Eval(Container.DataItem, "IdUsuario") %>'
+                                            type="button"
+                                            class="m-3 btn btn-outline-danger"
+                                            Text="Remover"></asp:Button>
+                                <asp:Button runat="server"
+                                            id="btnOuvir"
+                                            CommandName="Click"
+                                            CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Embed") %>'
+                                            type="button"
+                                            class="m-3 btn btn-outline-primary"
+                                            Text="Ouvir Música"></asp:Button>
+                                 </div>
+                           </div>
+                           </div>
                         </div>
                     </ItemTemplate>
                     <FooterTemplate>
-                            </div>
-			            </div>
-                    </FooterTemplate>
-                </asp:Repeater>
             </div>
         </div>
+        </FooterTemplate>
+                </asp:Repeater>
+    </div>
+    </div>
     </div>
 
 

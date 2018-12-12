@@ -14,7 +14,8 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         VerificarSession();
-        CarregarIndicacoes();
+        if (!IsPostBack)
+            CarregarIndicacoes();
     }
 
     private void VerificarSession()
@@ -30,7 +31,7 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
         rpMusicas.DataSource = ObterIndicacoes();
         rpMusicas.DataBind();
     }
-    
+
     private List<Indicacao> ObterIndicacoes()
     {
         return controle.ObterMusicaPorData(new Musica() { dtInclusao = DateTime.Now.Date });
@@ -41,14 +42,28 @@ public partial class Views_Musica_IndicacoesView : System.Web.UI.Page
         controle.RemoverMusica(new Musica() { idUsuario = usuario.id, dtInclusao = DateTime.Now.Date });
     }
 
-    //private void CarregarIndicacoesUsuario()
-    //{
-    //    //grid = ObterIndicacoesUsuario();
-    //    //grid blind
-    //}
+    protected void rpMusicas_ItemCreated(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.DataItem != null)
+        {
+            if ((e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem) && ((Indicacao)e.Item.DataItem).IdUsuario != usuario.id)
+            {
+                e.Item.FindControl("btnRemover").Visible = false;
+            }
+        }
+    }
 
-    //private Musica ObterIndicacoesUsuario()
-    //{
-    //    return (Musica)controle.ObterMusicaPorUsuarioData(new Musica() { dtInclusao = DateTime.Now.Date, idUsuario = usuario.id });
-    //}
+    protected void rpMusicas_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        switch (e.CommandName)
+        {
+            case "Remove":
+                RemoverMusica();
+                Response.Redirect("/Views/Musica/PesquisaView.aspx");
+                break;
+            case "Click":
+                Response.Redirect("/Views/Musica/PesquisaView.aspx");
+                break;
+        }
+    }
 }
