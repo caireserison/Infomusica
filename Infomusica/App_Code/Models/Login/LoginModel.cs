@@ -15,17 +15,13 @@ public class LoginModel
     public ILogin ObterUsuarioPorID(ILogin usuario)
     {
         var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.id == usuario.id);
-        usuario.id = retorno != null ? retorno.id : 0;
-        usuario.login = retorno != null ? retorno.login : String.Empty;
-        usuario.nome = retorno != null ? retorno.nome : String.Empty;
-        return usuario;
+        return AtribuirPropriedades(retorno);
     }
-
-    public ILogin ObterUsuario(ILogin usuario)
+    
+    public ILogin ObterUsuarioPorLogin(ILogin usuario)
     {
         var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login);
-        usuario.id = retorno != null ? retorno.id : 0;
-        return usuario;
+        return AtribuirPropriedades(retorno);
     }
 
     public void IncluirUsuario(ILogin usuario)
@@ -37,8 +33,16 @@ public class LoginModel
     public ILogin AutenticarUsuario(ILogin usuario)
     {
         var retorno = contextodb.TB_USUARIOS.FirstOrDefault(x => x.login == usuario.login && x.senha == usuario.senha);
-        usuario.id = retorno != null ? retorno.id : 0;
-        usuario.nome = retorno != null ? retorno.nome : null;
-        return usuario;
+        return AtribuirPropriedades(retorno);
+    }
+
+    private static Login AtribuirPropriedades(TB_USUARIOS retorno)
+    {
+        return new Login()
+        {
+            id = retorno != null ? retorno.id : 0,
+            login = retorno != null ? retorno.login : String.Empty,
+            nome = retorno != null ? retorno.nome : String.Empty
+        };
     }
 }
