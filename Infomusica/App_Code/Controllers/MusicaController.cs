@@ -25,7 +25,7 @@ public class MusicaController
         foreach (var item in musicas)
         {
             var faixa = deezer.BuscarFaixaPorId(item.idFaixa);
-            
+
             indicacoes.Add(
                 new Indicacao() {
                     IdMusica = faixa.Id,
@@ -35,7 +35,7 @@ public class MusicaController
                     NomeArtista = faixa.Artist.Name,
                     URLFotoArtista = faixa.Artist.Picture_medium,
                     NomeAlbum = faixa.Album.Title,
-                    Embed = faixa.Embed
+                    Embed = faixa.Embed.Replace("width='600'", "width='270'")
                 }
             );
         }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="IndicacoesView.aspx.cs" Inherits="Views_Musica_IndicacoesView"  %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="IndicacoesView.aspx.cs" Inherits="Views_Musica_IndicacoesView" %>
 
 <asp:Content ID="Style" ContentPlaceHolderID="StyleSelection" runat="server">
 </asp:Content>
@@ -9,7 +9,7 @@
             <br />
             <div class="table">
                 <!--Repeater do Resultado de Pesquisa-->
-                <asp:repeater id="rpMusicas" runat="server" OnItemCreated="rpMusicas_ItemCreated" OnItemCommand="rpMusicas_ItemCommand">
+                <asp:repeater id="rpMusicas" runat="server" onitemcreated="rpMusicas_ItemCreated" onitemcommand="rpMusicas_ItemCommand">
                     <HeaderTemplate>
                         <div class="table bg-transparent">
                             <div class="row">
@@ -34,17 +34,25 @@
                                             type="button"
                                             class="m-3 btn btn-outline-danger"
                                             Text="Remover"></asp:Button>
-                                <asp:Button runat="server"
+                                <button
                                             id="btnOuvir"
-                                            CommandName="Click"
-                                            CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Embed") %>'
+                                            data-toggle="collapse" 
+                                            href="#multiCollapse<%# Container.ItemIndex + 1 %>"
                                             type="button"
-                                            class="m-3 btn btn-outline-primary"
-                                            Text="Ouvir Música"></asp:Button>
+                                            class="m-3 btn btn-outline-primary">Ouvir Música</button>
                                  </div>
                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapse<%# Container.ItemIndex + 1 %>">
+                                  <div class="card card-body">
+                                    <%# DataBinder.Eval(Container.DataItem, "Embed") %>
+                                  </div>
+                                </div>
+                              </div>
                            </div>
                         </div>
+                            </div>
                     </ItemTemplate>
                     <FooterTemplate>
             </div>
