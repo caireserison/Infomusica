@@ -52,7 +52,7 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <span class="modal-title" id="exampleModalLabel">Você escolheu: 
+                            <span class="modal-title" id="exampleModalLabel"> 
                             <asp:Label ID="txEscolhido" class="col-form-label" runat="server" Text=""></asp:Label>
                             </span>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
