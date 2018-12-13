@@ -7,7 +7,7 @@
         <div class="form-group mx-auto mt-5 mb-5 align-self-center text-center" style="background: #f4f6f9">
             <div class="col-12">
                 <div class="form-group col-sm-12 text-center">
-                    <img class="w-25 h-25 m-3" src="../../img/Login/music.png" />
+                    <img class="m-3" src="../../img/Login/mindica_login.png" />
                 </div>
                 <h3 class="m-3">Bem Vindo, Faça seu cadastro</h3>
 
