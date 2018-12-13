@@ -25,7 +25,7 @@ public class MusicaModel
         foreach (var item in retorno)
             musicas.Add((Musica)AtribuirPropriedadesMusica(item));
         
-        return musicas;
+        return musicas.OrderByDescending(x => x.idMusica).ToList<Musica>();
     }
 
     public IMusica ObterMusicaPorUsuarioData(IMusica musica)
@@ -51,6 +51,7 @@ public class MusicaModel
     {
         return new Musica()
         {
+            idMusica = retorno != null ? retorno.idMusica : 0,
             idUsuario = retorno != null ? retorno.idUsuario : 0,
             idFaixa = retorno != null ? retorno.idFaixa : 0,
             dtInclusao = retorno != null ? retorno.dtInclusao : System.DateTime.MinValue

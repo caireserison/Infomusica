@@ -11,4 +11,5 @@ public interface IMusica
     int idUsuario { get; set; }
     int idFaixa { get; set; }
     System.DateTime dtInclusao { get; set; }
+    int idMusica { get; set; }
 }
