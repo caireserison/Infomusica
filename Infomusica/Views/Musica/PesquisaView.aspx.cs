@@ -18,6 +18,12 @@ public partial class InfoArtista : System.Web.UI.Page
             Response.Redirect("/Views/Musica/IndicacoesView.aspx");
     }
 
+    protected void btnBuscarArtista_Click(object sender, EventArgs e)
+    {
+        if (!String.IsNullOrEmpty(tbArtista.Text.Trim()))
+            ExibirArtistas();
+    }
+
     private void VerificarSession()
     {
         usuario = (Login)Session["usuario"];
@@ -30,16 +36,19 @@ public partial class InfoArtista : System.Web.UI.Page
         Musica musicaUsuario = (Musica)musica.ObterMusicaPorUsuarioData(new Musica() { idUsuario = usuario.id, dtInclusao = DateTime.Now.Date });
         return (musicaUsuario.idFaixa == 0);
     }
-
-    protected void btnBuscarArtista_Click(object sender, EventArgs e)
-    {
-        ExibirArtistas();
-    }
-
+    
     private void ExibirArtistas()
     {
-        rpPesquisa.DataSource = ObterArtistas();
-        rpPesquisa.DataBind();
+        var artistas = ObterArtistas();
+        if (artistas.Count != 0)
+        {
+            rpPesquisa.DataSource = artistas;
+            rpPesquisa.DataBind();
+        }
+        else
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "openModal()", true);
+        }
     }
 
     private List<Artistas> ObterArtistas()
@@ -69,7 +78,7 @@ public partial class InfoArtista : System.Web.UI.Page
         {
             case "Click":
                 ExibirFaixas(e.CommandArgument.ToString());
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModalMusicas();", true);
                 break;
         }
     }

@@ -5,7 +5,20 @@
 <asp:Content ID="ConteudoArtista" ContentPlaceHolderID="ContentSection" runat="server">
     <div class="container">
         <div class="jumbotron">
-            <h3>Pesquise um Artista</h3>
+
+            <div class="media mb-5">
+                <img style="width:100px;" class="mr-3" src="../../img/Login/mindica_login.png" alt="Generic placeholder image">
+                <div class="media-body">
+                    <h5 class="mt-0">O que é o Mindica?</h5>
+                    <p> Se você é apaixonado por música como nós, e adoraria receber indicações diarias de músicas de grupos especificos (amigos, familiares...)
+                        e adora conhecer e compartilhar suas experiencias musicais, você está no lugar certo. o MINDICA ajuda você a ter novas experiências musicais atráves de 
+                        indicações de amigos, começe agora indicando uma música e veja o que seus amigos tem para você...
+                    </p>
+                </div>
+            </div>
+            
+            <h3>Faça uma indicação e pesquise um artista</h3>
+            
             <div class="form-inline">
                 <div class="form-group">
                     <asp:TextBox ID="tbArtista" class="form-control col-sm-10" type="text" Text="" runat="server" placeholder="ex.: Aerosmith"></asp:TextBox>
@@ -52,8 +65,8 @@
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <span class="modal-title" id="exampleModalLabel"> 
-                            <asp:Label ID="txEscolhido" class="col-form-label" runat="server" Text=""></asp:Label>
+                            <span class="modal-title" id="exampleModalLabel">
+                                <asp:Label ID="txEscolhido" class="col-form-label" runat="server" Text=""></asp:Label>
                             </span>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -117,7 +130,31 @@
 
         </div>
     </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModalError">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Nenhum Registro Foi Encontrato</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <p>- Verificar se o nome foi digitado corretamente</p>
+                    <p>- Verificar se o artista é famoso suficiente para estar na nossa base de dados</p>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="ScriptSection" runat="server">
@@ -126,11 +163,14 @@
             $('#myInput').trigger('focus')
         })
 
-        function openModal() {
+        function openModalMusicas() {
             $('#exampleModal').modal({ show: true });
         }
 
-        $("iframe").contents().find("#dzplayer").addClass("embed-responsive");
+
+        function openModal() {
+            $('#myModalError').modal({ show: true });
+        }
 
     </script>
     <style>
